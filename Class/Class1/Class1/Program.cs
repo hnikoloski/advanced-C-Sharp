@@ -10,7 +10,7 @@ namespace Class1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world!!");
+            Console.WriteLine("We did't write any code");
             Console.ReadLine();
         }
     }
