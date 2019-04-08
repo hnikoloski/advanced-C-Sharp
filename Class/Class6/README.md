@@ -1,1 +1,1 @@
-# Class 5 - No exercises 
+# Class 6 - No exercises 
