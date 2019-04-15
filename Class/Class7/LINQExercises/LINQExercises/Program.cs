@@ -129,7 +129,7 @@ namespace LINQExercises
             
             // 1. Take person Cristofer and add Jack, Ellie, Hank and Tilly as his dogs.
 
-            var Cristofer = people.FirstOrDefault(predicate: p => p.FirstName == "Cristofer");
+            var Cristofer = people.FirstOrDefault(p => p.FirstName == "Cristofer");
             List<Dog> CristoferDogs = dogs.Where( d => d.Name == "Jack" || d.Name == "Ellie" || d.Name == "Tilly").ToList();
             //Cristofer.Dogs.AddRange(dogs);
             Cristofer?.Dogs.AddRange(dogs);
@@ -143,8 +143,8 @@ namespace LINQExercises
             }
 
             // 2. Take person Freddy and add Oscar, Toby, Chanel, Bo and Scout as his dogs.
-            var Freddy = people.FirstOrDefault(predicate: p => p.FirstName == "Freddy");
-            List<Dog> FreddyDogs = dogs.Where(predicate: d => d.Name == "Oscar" || d.Name == "Toby" || d.Name == "Chanel" ||  d.Name == "Bo" || d.Name == "Scout").ToList();
+            var Freddy = people.FirstOrDefault( p => p.FirstName == "Freddy");
+            List<Dog> FreddyDogs = dogs.Where( d => d.Name == "Oscar" || d.Name == "Toby" || d.Name == "Chanel" ||  d.Name == "Bo" || d.Name == "Scout").ToList();
             Freddy?.Dogs.AddRange(dogs);
             Console.WriteLine("\n Freddy dogs: \n ");
                 var j = 0;
@@ -155,14 +155,13 @@ namespace LINQExercises
             }
 
             // 3. Add Trixie, Archie and Max as dogs from Erin.
-            var Erin = people.FirstOrDefault(predicate: p => p.FirstName == "Erin");
-            List<Dog> ErinDogs = dogs.Where(predicate: d => d.Name == "Trixie" || d.Name == "Archie" || d.Name == "Max").ToList();
+            var Erin = people.FirstOrDefault( p => p.FirstName == "Erin");
+            List<Dog> ErinDogs = dogs.Where( d => d.Name == "Trixie" || d.Name == "Archie" || d.Name == "Max").ToList();
             Erin?.Dogs.AddRange(collection: dogs);
             var k = 0;
             Console.WriteLine("\n Erin dogs: \n ");
             foreach (var d in ErinDogs)
             {
-              
                 k++;
                 Console.WriteLine(k + ")" + d.Name);
             }
@@ -187,8 +186,7 @@ namespace LINQExercises
             Console.WriteLine("\n Larry's dogs: \n ");
             foreach (var d in LarryDogs)
             {
-               
-                Console.WriteLine(d.Name);
+               Console.WriteLine(d.Name);
             }
 
             // 6. Add all retrievers to Erika.
@@ -199,7 +197,6 @@ namespace LINQExercises
             Console.WriteLine("\n Erika's dogs: \n ");
             foreach (var d in ErikaDogs)
             {
-
                 Console.WriteLine(d.Name + " " + d.Race);
             }
 
@@ -212,7 +209,6 @@ namespace LINQExercises
             Console.WriteLine("\n August's dogs: \n ");
             foreach (var d in AugustDogs)
             {
-
                 Console.WriteLine(d.Name);
             }
             #endregion
@@ -224,7 +220,6 @@ namespace LINQExercises
             Console.WriteLine( "\n Persons with A: ");
             foreach (var p in PersonsWithA)
             {
-                
             Console.WriteLine(p.FirstName + " "+"age:" +  p.Age);
             }
 
@@ -233,37 +228,39 @@ namespace LINQExercises
             Console.WriteLine("\n Brown dogs ");
             foreach (var d in BrownDogs)
             {
-
                 Console.WriteLine(d.Name + " " + "age:"+ d.Age);
             }
 
             // 3. Find and print all persons with more than 2 dogs, ordered by name - DESCENDING ORDER.
-            //List<Person> TwoDogsPerson = people.Where(d => dogs.Count>2).ToList();
+            //List<Person> TwoDogsPerson = people.Where(d => dogs.Count > 2).ToList();
 
-            var TwoDogsPerson = people.Where(p => dogs.Count > 2).OrderByDescending(p => p.FirstName);
-            Console.WriteLine("\n People with 2 or more dogs ");
-            foreach (var p in TwoDogsPerson)
-            {
+            //var TwoDogsPerson = people.Where(p => dogs.Count > 2).OrderByDescending(p => p.FirstName);
+            //Console.WriteLine("\n People with 2 or more dogs ");
+            //foreach (var p in TwoDogsPerson)
+            //{
 
-                Console.WriteLine(p.FirstName);
-            }
+            //    Console.WriteLine(p.FirstName);
+            //}
 
 
             // 4. Find and print all persons names, last names and job positions that have just one race type dogs.
-            var PersonWithSameDogRace = "";
+            var personWithSameDogRace = people?.Where(p => p.Dogs != null)
+                .Select(p => new { FirstName = p.FirstName, DifferentDogRaces = p.Dogs.Select(d => d.Race).Distinct() })
+                .Where(c => c.DifferentDogRaces.Count() == 1);
 
 
-
-
-
-
+            Console.WriteLine("\nExercise 4 \n");
+            foreach (var personWithSameRace in personWithSameDogRace)
+            {
+                Console.WriteLine(personWithSameRace.FirstName);
+            }
 
 
             // 5. Find and print all Freddy`s dogs names older than 1 year, grouped by dogs race.
-            var FreddyV2 = people.FirstOrDefault(p => p.FirstName == "Freddy");
+            //var FreddyV2 = people.FirstOrDefault(p => p.FirstName == "Freddy");
 
             List<Dog> FreddysOneYear = FreddyDogs.Where(d => d.Age >= 1).ToList();
-            FreddyV2?.Dogs.AddRange(dogs);
+            Freddy?.Dogs.AddRange(dogs);
             var g = 0;
             Console.WriteLine("\n Freddy's 1+ yo dogs: \n ");
             foreach (var d in FreddysOneYear)
@@ -273,13 +270,6 @@ namespace LINQExercises
             }
 
             #endregion
-
-
-
-
-
-
-
 
 
             #endregion
