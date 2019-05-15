@@ -8,6 +8,19 @@ namespace workShop
 {
     public class Users
     {
+        public static string Email { get; set; }
+        public static string Role { get; set; }
+        public static string Password { get; set; }
         
+
+        public Users(string email, string password, string role)
+        {
+            Email = email;
+            Password = password;
+            Role = role;
+
+        }
+
+       
     }
 }

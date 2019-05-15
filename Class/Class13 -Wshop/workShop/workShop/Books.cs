@@ -8,12 +8,15 @@ namespace workShop
 {
    public class Books
     {
-        public int stock { get; set; }
-        public string title { get; set; }
-        public int year { get; set; }
-        public int numOfPages { get; set; }
-        public int rentTimes { get; set; }
+        public int Stock { get; set; }
+        public string Title { get; set; }
+        public int Year { get; set; }
+        public int NumOfPages { get; set; }
+        public int RentTimes { get; set; }
         //Search filters : title, genre, year, number of pages.
-
+        public Books(int stock, string title, int year, int numOfPages, int rentTimes)
+        {
+            
+        }
     }
 }
